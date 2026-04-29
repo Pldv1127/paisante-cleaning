@@ -11,11 +11,11 @@ type Review = {
 };
 
 const AVATAR_COLORS = [
-  "linear-gradient(135deg,#5C8471,#2C4A3E)",
-  "linear-gradient(135deg,#C9963A,#E8C882)",
-  "linear-gradient(135deg,#4285F4,#34A853)",
-  "linear-gradient(135deg,#EA4335,#FBBC05)",
-  "linear-gradient(135deg,#A8C4B8,#5C8471)",
+  "linear-gradient(135deg,#1A6115,#5EBE55)",
+  "linear-gradient(135deg,#5EBE55,#9CCC46)",
+  "linear-gradient(135deg,#026EB7,#1A9AD7)",
+  "linear-gradient(135deg,#2C3E70,#026EB7)",
+  "linear-gradient(135deg,#9CCC46,#5EBE55)",
 ];
 
 type SubmitState = "idle" | "loading" | "success" | "error";
