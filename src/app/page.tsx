@@ -333,9 +333,12 @@ export default function Home() {
       <footer>
         <div className="footer-inner">
           <div className="footer-top">
-            <div>
-              <div className="footer-brand-name">Paisante <span>Cleaning Services</span></div>
-              <p className="footer-tagline">Personalized, professional cleaning for homes and businesses across Pennsylvania. Over 22 years of trusted service.</p>
+            <div style={{ display: "flex", alignItems: "center", gap: "18px" }}>
+              <img src="/logo-vertical.png" alt="Paisante Cleaning Services" style={{ width: "170px", flexShrink: 0 }} />
+              <div>
+                <div className="footer-brand-name">Paisante <span>Cleaning Services</span></div>
+                <p className="footer-tagline">Personalized, professional cleaning for homes and businesses across Pennsylvania. Over 22 years of trusted service.</p>
+              </div>
             </div>
             <div>
               <div className="footer-col-title">Services</div>
