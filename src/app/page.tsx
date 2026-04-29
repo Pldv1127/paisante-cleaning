@@ -1,5 +1,6 @@
 import ContactForm from "@/components/ContactForm";
 import ReviewsSection from "@/components/ReviewsSection";
+import HeroFloatingImages from "@/components/HeroFloatingImages";
 
 export const metadata = {
   title: "Paisante Cleaning Services | Pennsylvania",
@@ -62,12 +63,7 @@ export default function Home() {
         <div className="hero-right">
   <div className="hero-pattern" />
 
-  <div className="floating-images" aria-hidden="true">
-    <img src="/cleaning1.jpg" className="nav-logo-img"/>
-    <img src="/cleaning2.png" className="nav-logo-img"/>
-    <img src="/cleaning3.png" className="nav-logo-img"/>
-    <img src="/cleaning4.png" className="nav-logo-img"/>
-  </div>
+  <HeroFloatingImages />
 
   <div className="hero-right-inner">
     <div className="hero-card">

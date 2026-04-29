@@ -26,36 +26,72 @@ export default function ClientEffects() {
     const wipeTitles = document.querySelectorAll<HTMLElement>(".section-title");
     wipeTitles.forEach((el) => el.classList.add("wipe-init"));
 
+    // We observe the unclipped .reveal ancestor rather than the title element
+    // itself. clip-path:inset(0 100% 0 0) reduces the element's visual area to
+    // zero, so Chrome's IntersectionObserver reports ratio=0 and never fires
+    // isIntersecting:true — keeping the title hidden forever.
     const wipeObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
-          const el = entry.target as HTMLElement;
-          el.classList.add("wipe-in");
-          wipeObserver.unobserve(el);
+          const container = entry.target as HTMLElement;
+          wipeObserver.unobserve(container);
+          const el = container.querySelector<HTMLElement>(".section-title");
+          if (!el) return;
 
-          // Spark burst when the wipe completes
-          const sparks = [
-            { l: "-14px", t: "-14px" },
-            { l: "calc(100% + 6px)", t: "-10px" },
-            { l: "calc(100% + 10px)", t: "calc(100% + 6px)" },
-            { l: "-10px", t: "calc(100% + 8px)" },
-          ];
-          sparks.forEach(({ l, t }, i) => {
-            const spark = document.createElement("span");
-            spark.className = "section-spark";
-            spark.style.left = l;
-            spark.style.top = t;
-            spark.style.animationDelay = i * 0.1 + "s";
-            el.style.position = "relative";
-            el.appendChild(spark);
-            setTimeout(() => spark.remove(), 1000 + i * 100);
-          });
+          // Wait for the parent .reveal to start fading in (700ms transition)
+          // before triggering the clip-path animation so it's actually visible.
+          setTimeout(() => {
+            el.classList.add("wipe-play");
+
+            const r = el.getBoundingClientRect();
+            const glove = document.createElement("span");
+            glove.className = "wipe-glove";
+            document.body.appendChild(glove);
+
+            // All positioning is in the keyframe transforms (not top/left CSS props).
+            // body has overflow-x:hidden which makes Chrome treat it as a scroll
+            // container — position:fixed elements then drift vertically during scroll.
+            // Compositor-driven transforms are immune to this.
+            const gloveH = 90;
+            const y = r.top + r.height / 2 - gloveH / 2;
+            glove.animate(
+              [
+                { transform: `translate(${r.left - 30}px, ${y}px)`, opacity: 1 },
+                { transform: `translate(${r.left + r.width * 0.8}px, ${y}px)`, opacity: 1, offset: 0.8 },
+                { transform: `translate(${r.left + r.width + 30}px, ${y}px)`, opacity: 0 },
+              ],
+              { duration: 850, easing: "cubic-bezier(.22,.61,.36,1)" }
+            ).onfinish = () => glove.remove();
+
+            // Spark burst at the four title corners when the wipe finishes
+            setTimeout(() => {
+              el.style.position = "relative";
+              const sparks = [
+                { l: "-14px", t: "-14px" },
+                { l: "calc(100% + 6px)", t: "-10px" },
+                { l: "calc(100% + 10px)", t: "calc(100% + 6px)" },
+                { l: "-10px", t: "calc(100% + 8px)" },
+              ];
+              sparks.forEach(({ l, t }, i) => {
+                const spark = document.createElement("span");
+                spark.className = "section-spark";
+                spark.style.left = l;
+                spark.style.top  = t;
+                spark.style.animationDelay = i * 0.1 + "s";
+                el.appendChild(spark);
+                setTimeout(() => spark.remove(), 1000 + i * 100);
+              });
+            }, 850);
+          }, 380);
         });
       },
       { threshold: 0.25 }
     );
-    wipeTitles.forEach((el) => wipeObserver.observe(el));
+    wipeTitles.forEach((el) => {
+      const reveal = el.closest<HTMLElement>(".reveal");
+      wipeObserver.observe(reveal ?? el);
+    });
 
     // ── Scroll reveal (fade + lift for non-title elements) ───
     const reveals = document.querySelectorAll<HTMLElement>(".reveal");
