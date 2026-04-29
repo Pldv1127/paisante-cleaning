@@ -12,11 +12,15 @@ export default function Home() {
     <>
       {/* ── NAV ── */}
       <nav id="mainNav">
-        <a href="#" className="nav-logo">
-          Paisante <span>Cleaning</span>
+        <a href="/" className="nav-logo">
+          <img
+            src="/logo-horizontal.png"
+            alt="Paisante Cleaning Services logo"
+            className="nav-logo-img"
+          />
         </a>
         <ul className="nav-links">
-          <li><a href="#better">About</a></li>
+          <li><a href="#about">About</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#standards">Standards</a></li>
           <li><a href="#reviews">Reviews</a></li>
@@ -56,23 +60,31 @@ export default function Home() {
           </div>
         </div>
         <div className="hero-right">
-          <div className="hero-pattern" />
-          <div className="hero-right-inner">
-            <div className="hero-card">
-              <p className="hero-card-quote">
-                "We listen to every client's request and personalize our services to earn your trust."
-              </p>
-              <div className="hero-card-author">
-                <div className="author-avatar">V</div>
-                <div className="author-info">
-                  <p>Waldelania Paisante (Val)</p>
-                  <p>Founder &amp; Owner</p>
-                </div>
-              </div>
-            </div>
-            <div className="gold-leaf">✦</div>
-          </div>
+  <div className="hero-pattern" />
+
+  <div className="floating-images" aria-hidden="true">
+    <img src="/cleaning1.jpg" className="nav-logo-img"/>
+    <img src="/cleaning2.png" className="nav-logo-img"/>
+    <img src="/cleaning3.png" className="nav-logo-img"/>
+    <img src="/cleaning4.png" className="nav-logo-img"/>
+  </div>
+
+  <div className="hero-right-inner">
+    <div className="hero-card">
+      <p className="hero-card-quote">
+        "We listen to every client's request and personalize our services to earn your trust."
+      </p>
+      <div className="hero-card-author">
+        <div className="author-avatar">V</div>
+        <div className="author-info">
+          <p>Waldelania Paisante (Val)</p>
+          <p>Founder &amp; Owner</p>
         </div>
+      </div>
+    </div>
+    <div className="gold-leaf">✦</div>
+  </div>
+</div>
       </section>
 
       {/* ── HOW WE'RE BETTER ── */}
@@ -122,8 +134,11 @@ export default function Home() {
             <div className="about-photo-wrap reveal">
               <div className="about-photo">
                 <div className="about-photo-placeholder">
-                  <div className="icon">🌿</div>
-                  <p>Val's Photo Here</p>
+                  <img
+                    src="/val-portfolio.jpg"
+                    alt="Val, founder of Paisante Cleaning Services"
+                    className="about-photo-img"
+                  />
                 </div>
               </div>
               <div className="about-accent" />
