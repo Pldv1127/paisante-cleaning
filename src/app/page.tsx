@@ -26,8 +26,8 @@ export default function Home() {
           <li><a href="#standards">Standards</a></li>
           <li><a href="#reviews">Reviews</a></li>
           <li><a href="#faq">FAQ</a></li>
-          <li><a href="#contact" className="nav-cta">Get a Quote</a></li>
         </ul>
+        <a href="#contact" className="nav-cta">Get a Quote</a>
       </nav>
 
       {/* ── HERO ── */}
@@ -52,11 +52,11 @@ export default function Home() {
             </div>
             <div>
               <div className="stat-num">100%</div>
-              <div className="stat-label">Personalized</div>
+              <div className="stat-label">Fully Insured</div>
             </div>
             <div>
-              <div className="stat-num">6</div>
-              <div className="stat-label">Service Types</div>
+              <div className="stat-num">500+</div>
+              <div className="stat-label">Happy Customers</div>
             </div>
           </div>
         </div>
