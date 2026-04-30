@@ -767,6 +767,24 @@ footer { background: linear-gradient(135deg, #1B2A5A 0%, #2C3E70 100%); padding:
   100% { transform: translateY(-110vh) scale(1.1); opacity: 0; }
 }
 
+/* Schedule card bubbles — rise then pop */
+.bubble-schedule {
+  position: absolute;
+  bottom: -40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.28);
+  animation: bubble-rise-pop linear infinite;
+}
+@keyframes bubble-rise-pop {
+  0%   { transform: translateY(0)     scale(1);   opacity: 0;    }
+  8%   { transform: translateY(-20px) scale(1);   opacity: 0.85; }
+  70%  { transform: translateY(-300px) scale(1);   opacity: 0.8;  }
+  80%  { transform: translateY(-320px) scale(1.9); opacity: 0.45; }
+  88%  { transform: translateY(-332px) scale(2.6); opacity: 0.05; }
+  100% { transform: translateY(-332px) scale(2.6); opacity: 0;    }
+}
+
 /* ── HERO BADGE SPARKLE ── */
 .sparkle-wrap { position: relative; display: inline-flex; align-items: center; }
 .sparkle {

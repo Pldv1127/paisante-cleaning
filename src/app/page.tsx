@@ -219,6 +219,16 @@ export default function Home() {
         <div className="section-inner">
           <div className="schedule-inner">
             <div className="schedule-visual reveal">
+              <div className="bubbles-wrap" aria-hidden="true">
+                <div className="bubble-schedule" style={{ left: "8%",  width: "22px", height: "22px", animationDuration: "4.2s", animationDelay: "0s"   }} />
+                <div className="bubble-schedule" style={{ left: "22%", width: "14px", height: "14px", animationDuration: "5.8s", animationDelay: "1.1s"  }} />
+                <div className="bubble-schedule" style={{ left: "40%", width: "28px", height: "28px", animationDuration: "3.6s", animationDelay: "0.5s"  }} />
+                <div className="bubble-schedule" style={{ left: "58%", width: "16px", height: "16px", animationDuration: "6.1s", animationDelay: "2.3s"  }} />
+                <div className="bubble-schedule" style={{ left: "72%", width: "20px", height: "20px", animationDuration: "4.9s", animationDelay: "0.8s"  }} />
+                <div className="bubble-schedule" style={{ left: "85%", width: "12px", height: "12px", animationDuration: "5.3s", animationDelay: "1.7s"  }} />
+                <div className="bubble-schedule" style={{ left: "32%", width: "10px", height: "10px", animationDuration: "7.0s", animationDelay: "3.2s"  }} />
+                <div className="bubble-schedule" style={{ left: "65%", width: "18px", height: "18px", animationDuration: "4.5s", animationDelay: "2.9s"  }} />
+              </div>
               <h3 className="schedule-title">Cleaning Programs Tailored Around Your Schedule</h3>
               <ul className="schedule-list">
                 <li>One-time deep cleans for any occasion</li>
