@@ -51,8 +51,8 @@ export async function POST(req: Request) {
     const rejectUrl = `${siteUrl}/api/reject?token=${approvalToken}`;
     const stars = "★".repeat(review.rating) + "☆".repeat(5 - review.rating);
 
-    // Send approval email to Val
-    await resend.emails.send({
+    // Send approval email to Val — non-blocking so a mail failure doesn't fail the submission
+    resend.emails.send({
       from: process.env.FROM_EMAIL!,
       to: process.env.VAL_EMAIL!,
       subject: `New Review from ${name} — ${stars}`,
