@@ -29,7 +29,7 @@ nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 15px 60px;
-  background: rgba(251,248,205,0.95);
+  background: rgba(244, 243, 230, 0.95);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
   transition: box-shadow .3s;
@@ -508,8 +508,8 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.06); }
   content: ''; position: absolute; top: 0; bottom: 0; width: 80px;
   z-index: 2; pointer-events: none;
 }
-.reviews-track-wrap::before { left: 0; background: linear-gradient(to right, var(--cream), transparent); }
-.reviews-track-wrap::after  { right: 0; background: linear-gradient(to left, var(--cream), transparent); }
+.reviews-track-wrap::before { left: 0; background: linear-gradient(to right, var(--warm-white), transparent); }
+.reviews-track-wrap::after  { right: 0; background: linear-gradient(to left, var(--warm-white), transparent); }
 .reviews-track {
   display: flex; gap: 24px; overflow-x: auto; padding: 12px 4px 24px;
   scrollbar-width: none; scroll-snap-type: x mandatory; -ms-overflow-style: none;
