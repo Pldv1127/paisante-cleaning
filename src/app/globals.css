@@ -648,7 +648,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.06); }
 .form-submit:hover { opacity: .88; }
 
 /* ── FOOTER ── */
-footer { background: linear-gradient(135deg, #1B2A5A 0%, #2C3E70 100%); padding: 60px 80px 40px; }
+footer { background: linear-gradient(135deg, #69d0ff 0%, #2C3E70 100%); padding: 60px 80px 40px; }
 .footer-inner { max-width: 1200px; margin: 0 auto; }
 .footer-top {
   display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px;
@@ -875,6 +875,49 @@ footer { background: linear-gradient(135deg, #1B2A5A 0%, #2C3E70 100%); padding:
   30%  { transform: translateY(-8px); }
   60%  { transform: translateY(-3px); }
   100% { transform: translateY(0); }
+}
+
+/* ── WAVE DIVIDERS ── */
+#better, #standards, #faq { position: relative; }
+
+/* Hero → Better (warm-white wave) */
+#better::before {
+  content: '';
+  position: absolute;
+  top: -58px; left: 0; width: 100%; height: 60px;
+  background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' preserveAspectRatio='none'><path d='M0,42 C200,8 500,58 780,22 C1000,2 1250,54 1440,30 L1440,60 L0,60 Z' fill='%23FFFEF8'/></svg>") no-repeat center/100% 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* About → Standards (dark-green wave dips into cream) */
+#standards::before {
+  content: '';
+  position: absolute;
+  top: -58px; left: 0; width: 100%; height: 60px;
+  background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' preserveAspectRatio='none'><path d='M0,20 C280,62 640,0 940,46 C1130,70 1330,14 1440,34 L1440,0 L0,0 Z' fill='%231A6115'/></svg>") no-repeat center/100% 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Standards → Services (cream wave) */
+#standards::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0; width: 100%; height: 70px;
+  background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 70' preserveAspectRatio='none'><path d='M0,30 C360,70 720,6 1060,52 C1240,70 1360,18 1440,38 L1440,70 L0,70 Z' fill='%23FBF8CD'/></svg>") no-repeat center/100% 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* FAQ → Contact (warm-white wave) */
+#faq::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0; width: 100%; height: 60px;
+  background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' preserveAspectRatio='none'><path d='M0,36 C300,4 660,60 960,20 C1160,0 1320,50 1440,26 L1440,60 L0,60 Z' fill='%23FFFEF8'/></svg>") no-repeat center/100% 100%;
+  pointer-events: none;
+  z-index: 5;
 }
 
 /* ── TABLET ── */
