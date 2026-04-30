@@ -211,6 +211,14 @@ export default function ReviewsSection() {
   const hoveredRef = useRef(false);
   const btnPausedRef = useRef(false);
   const pauseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isMobileRef = useRef(false);
+
+  useEffect(() => {
+    const check = () => { isMobileRef.current = window.innerWidth < 768; };
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   useEffect(() => {
     fetch("/api/reviews")
@@ -242,7 +250,7 @@ export default function ReviewsSection() {
   useEffect(() => {
     if (loading) return;
     const tick = () => {
-      if (!hoveredRef.current && !btnPausedRef.current) {
+      if (!hoveredRef.current && !btnPausedRef.current && !isMobileRef.current) {
         offsetRef.current += 0.4;
         if (offsetRef.current >= totalWidth) offsetRef.current -= totalWidth;
         applyOffset();
@@ -309,7 +317,7 @@ export default function ReviewsSection() {
           ) : (
             <div className="reviews-track" ref={trackRef}>
               {[...displayReviews, ...displayReviews].map((r, i) => (
-                <div className="review-card" key={`${r.id}-${i}`}>
+                <div className={`review-card${i >= displayReviews.length ? " review-card-duplicate" : ""}`} key={`${r.id}-${i}`}>
                   <span className="review-google-icon">
                     {reviews.length > 0 ? "Verified" : ""}
                   </span>

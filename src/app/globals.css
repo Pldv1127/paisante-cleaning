@@ -576,6 +576,16 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.06); }
 }
 .google-review-link:hover { color: var(--gold); border-color: var(--gold); }
 
+@media (max-width: 767px) {
+  .reviews-track-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .reviews-track-wrap::-webkit-scrollbar { display: none; }
+  .reviews-track-wrap::before, .reviews-track-wrap::after { display: none; }
+  .reviews-track { scroll-snap-type: x mandatory; }
+  .review-card { scroll-snap-align: start; }
+  .review-card-duplicate { display: none; }
+  .reviews-nav { display: none; }
+}
+
 /* ── FAQ ── */
 .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 64px; align-items: start; }
 .faq-sidebar { position: sticky; top: 100px; }
