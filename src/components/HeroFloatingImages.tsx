@@ -4,17 +4,16 @@ import { useEffect, useRef } from "react";
 
 interface FImg {
   src: string;
-  cls: string;   // positions the wrapper via CSS
-  w: number;
-  h: number;
+  cls: string;   // positions + sizes the wrapper via CSS
   speed: number; // parallax rate; sign sets direction
 }
 
 const IMGS: FImg[] = [
-  { src: "/cleaning1.jpg", cls: "fi-w1", w: 275, h: 204, speed:  0.13 },
-  { src: "/cleaning2.png", cls: "fi-w2", w: 218, h: 282, speed: -0.09 },
-  { src: "/cleaning3.png", cls: "fi-w3", w: 252, h: 189, speed:  0.19 },
-  { src: "/cleaning4.png", cls: "fi-w4", w: 228, h: 296, speed: -0.14 },
+  { src: "/cleaning1.jpg", cls: "fi-w1", speed:  0.13 },
+  { src: "/cleaning2.png", cls: "fi-w2", speed: -0.09 },
+  { src: "/cleaning3.png", cls: "fi-w3", speed:  0.19 },
+  { src: "/cleaning4.png", cls: "fi-w4", speed: -0.14 },
+  { src: "/cleaning5.jpg", cls: "fi-w5", speed:  0.11 },
 ];
 
 export default function HeroFloatingImages() {
@@ -44,7 +43,6 @@ export default function HeroFloatingImages() {
           <img
             src={img.src}
             className="fi-img"
-            style={{ width: img.w, height: img.h }}
             alt=""
           />
         </div>
