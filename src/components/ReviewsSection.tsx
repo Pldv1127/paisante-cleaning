@@ -205,6 +205,7 @@ export default function ReviewsSection() {
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
 
+  const [isMobile, setIsMobile] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
   const offsetRef = useRef(0);
   const rafRef = useRef<number>(0);
@@ -214,7 +215,11 @@ export default function ReviewsSection() {
   const isMobileRef = useRef(false);
 
   useEffect(() => {
-    const check = () => { isMobileRef.current = window.innerWidth < 768; };
+    const check = () => {
+      const mobile = window.innerWidth < 768;
+      isMobileRef.current = mobile;
+      setIsMobile(mobile);
+    };
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
@@ -316,8 +321,8 @@ export default function ReviewsSection() {
             <div style={{ padding: "40px", color: "var(--mid-gray)" }}>Loading reviews…</div>
           ) : (
             <div className="reviews-track" ref={trackRef}>
-              {[...displayReviews, ...displayReviews].map((r, i) => (
-                <div className={`review-card${i >= displayReviews.length ? " review-card-duplicate" : ""}`} key={`${r.id}-${i}`}>
+              {(isMobile ? displayReviews : [...displayReviews, ...displayReviews]).map((r, i) => (
+                <div className="review-card" key={`${r.id}-${i}`}>
                   <span className="review-google-icon">
                     {reviews.length > 0 ? "Verified" : ""}
                   </span>
