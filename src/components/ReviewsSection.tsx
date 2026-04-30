@@ -205,7 +205,7 @@ export default function ReviewsSection() {
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
 
-  const [isMobile, setIsMobile] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const offsetRef = useRef(0);
   const rafRef = useRef<number>(0);
@@ -215,11 +215,7 @@ export default function ReviewsSection() {
   const isMobileRef = useRef(false);
 
   useEffect(() => {
-    const check = () => {
-      const mobile = window.innerWidth < 768;
-      isMobileRef.current = mobile;
-      setIsMobile(mobile);
-    };
+    const check = () => { isMobileRef.current = window.innerWidth < 768; };
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
@@ -252,13 +248,27 @@ export default function ReviewsSection() {
     }
   }, []);
 
+  const triggerPause = useCallback(() => {
+    btnPausedRef.current = true;
+    if (pauseTimerRef.current) clearTimeout(pauseTimerRef.current);
+    pauseTimerRef.current = setTimeout(() => { btnPausedRef.current = false; }, 30000);
+  }, []);
+
   useEffect(() => {
     if (loading) return;
     const tick = () => {
-      if (!hoveredRef.current && !btnPausedRef.current && !isMobileRef.current) {
-        offsetRef.current += 0.4;
-        if (offsetRef.current >= totalWidth) offsetRef.current -= totalWidth;
-        applyOffset();
+      if (!hoveredRef.current && !btnPausedRef.current) {
+        if (isMobileRef.current) {
+          const el = wrapperRef.current;
+          if (el) {
+            el.scrollLeft += 0.4;
+            if (el.scrollLeft >= totalWidth) el.scrollLeft -= totalWidth;
+          }
+        } else {
+          offsetRef.current += 0.4;
+          if (offsetRef.current >= totalWidth) offsetRef.current -= totalWidth;
+          applyOffset();
+        }
       }
       rafRef.current = requestAnimationFrame(tick);
     };
@@ -268,7 +278,6 @@ export default function ReviewsSection() {
 
   const scroll = (dir: "left" | "right") => {
     if (!trackRef.current) return;
-    btnPausedRef.current = true;
     const step = dir === "right" ? CARD_STEP : -CARD_STEP;
     let target = offsetRef.current + step;
     target = ((target % totalWidth) + totalWidth) % totalWidth;
@@ -278,10 +287,7 @@ export default function ReviewsSection() {
     setTimeout(() => {
       if (trackRef.current) trackRef.current.style.transition = "";
     }, 520);
-    if (pauseTimerRef.current) clearTimeout(pauseTimerRef.current);
-    pauseTimerRef.current = setTimeout(() => {
-      btnPausedRef.current = false;
-    }, 30000);
+    triggerPause();
   };
 
   const avgRating = reviews.length
@@ -314,14 +320,16 @@ export default function ReviewsSection() {
 
         <div
           className="reviews-track-wrap reveal"
+          ref={wrapperRef}
           onMouseEnter={() => { hoveredRef.current = true; }}
           onMouseLeave={() => { hoveredRef.current = false; }}
+          onTouchStart={triggerPause}
         >
           {loading ? (
             <div style={{ padding: "40px", color: "var(--mid-gray)" }}>Loading reviews…</div>
           ) : (
             <div className="reviews-track" ref={trackRef}>
-              {(isMobile ? displayReviews : [...displayReviews, ...displayReviews]).map((r, i) => (
+              {[...displayReviews, ...displayReviews].map((r, i) => (
                 <div className="review-card" key={`${r.id}-${i}`}>
                   <span className="review-google-icon">
                     {reviews.length > 0 ? "Verified" : ""}

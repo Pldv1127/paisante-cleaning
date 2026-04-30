@@ -579,9 +579,6 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.06); }
 @media (max-width: 767px) {
   .reviews-track-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
   .reviews-track-wrap::-webkit-scrollbar { display: none; }
-  .reviews-track-wrap::before, .reviews-track-wrap::after { display: none; }
-  .reviews-track { scroll-snap-type: x mandatory; }
-  .review-card { scroll-snap-align: start; }
   .reviews-nav { display: none; }
 }
 
