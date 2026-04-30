@@ -267,14 +267,15 @@ export default function Home() {
             </div>
             <div className="faq-list reveal" id="faqList">
               {[
-                { q: "Do I need to be home during the cleaning?", a: "Not at all! Many of our clients provide us with a key or door code and go about their day. We're fully trustworthy and treat every home with the utmost care and respect. If you prefer to be present your first visit, that's always welcome too." },
+                { q: "Do I need to be home during the cleaning?", a: "Not at all! We clean Monday – Friday, 8:30 a.m. to 5 p.m. and most of our customers aren’t home but the vast majority trust Maid in Hoboken with the key to their home. For additional security, all house keys are individually coded, cross-referenced and secured in our office. If you prefer to be present your first visit, that's always welcome too." },
                 { q: "Do you bring your own cleaning supplies and equipment?", a: "Yes — we arrive fully equipped with professional-grade cleaning products and tools. If you have a preference for specific products (for example, eco-friendly or fragrance-free), just let us know and we'll accommodate whenever possible." },
-                { q: "How do I get a price quote?", a: "Every home and business is unique, so we don't offer one-size-fits-all pricing. Fill out our contact form or give us a call and we'll schedule a quick consultation to understand your space and give you a personalized, no-obligation quote." },
+                { q: "Does the cleaning personnel speak English?", a: "We are a non-discriminating employer and have a diverse, multi-cultural staff. Good communication is important to us. Thus, we ask our clients to relay any comments or requests diectly to our office. All our staff are in touch with the office via cell phone throughout the work day. We can easily call a staff member to relay a message for you even while they are working in your home. Just let us know." },
                 { q: "How often should I schedule cleaning services?", a: "It depends on your lifestyle, family size, and preferences. Many clients choose weekly or bi-weekly for homes, while others prefer monthly deep cleans. For commercial spaces, we often recommend weekly or daily janitorial service." },
                 { q: "Are your staff trained and trustworthy?", a: "Absolutely. Our team is fully trained, professional, and held to the highest standards. Val personally oversees all operations and ensures every team member respects your space and follows your specific instructions." },
                 { q: "Do you offer one-time cleans or only recurring service?", a: "Both! We offer one-time deep cleans for move-ins, move-outs, post-construction, special events, or just when you need a fresh start. We also offer flexible recurring programs — weekly, bi-weekly, or monthly." },
                 { q: "What areas of Pennsylvania do you serve?", a: "We serve homes and businesses throughout the Pennsylvania area. Not sure if we cover your location? Reach out and we'll let you know — we're always happy to discuss your needs." },
-                { q: "What if I'm not satisfied with the cleaning?", a: "Your satisfaction is our priority. If something doesn't meet your expectations, let us know and we will make it right — no questions asked. We stand behind our work 100% and are committed to earning your trust every single visit." },
+                { q: "What should I prepare before the cleaning staff arrives?", a: "You can help us provide exceptional cleaning service by contacting us with any concerns or questions. If you pick up and tidy all rooms before we arrive, we can dedicate our time to cleaning, rather than to straightening up. It will be more cost-effective if you do the straightening up before we arrive. Tidying the house before our arrival also prevents us from putting stray objects in the wrong location.You can also place fresh linens on the beds if you would like us to strip the sheets and remake the bed with clean linens. We also suggest that you check and repair loose or broken items, such as towel racks, toilet paper holders, microwave and refrigerator handles, glass shelves, and so on." },
+                { q: "Am I liable for workeres' compensation, insurance or employment taxes?", a: "We offer worry-free home cleaning services. That means we take care of personal liability with regard to any work-related injury. Many independent maid services are not, which makes homeowners liable. We are fully insured, licensed and bonded for your protection and ours." },
               ].map((item) => (
                 <div className="faq-item" key={item.q}>
                   <button className="faq-question" aria-expanded="false">
@@ -303,7 +304,7 @@ export default function Home() {
             <div className="contact-info reveal">
               <div className="contact-item">
                 <div className="contact-item-label">Location</div>
-                <div className="contact-item-value">Serving Pennsylvania<br />and surrounding areas</div>
+                <div className="contact-item-value">Serving Bucks County<br />and surrounding areas</div>
               </div>
               <div className="contact-item">
                 <div className="contact-item-label">Phone</div>
@@ -314,12 +315,12 @@ export default function Home() {
               <div className="contact-item">
                 <div className="contact-item-label">Email</div>
                 <div className="contact-item-value">
-                  <a href="mailto:info@paisantecleaning.com">info@paisantecleaning.com</a>
+                  <a href="mailto:waldelania@paisantecleaning.com">waldelania@paisantecleaning.com</a>
                 </div>
               </div>
               <div className="contact-item">
                 <div className="contact-item-label">Hours</div>
-                <div className="contact-item-value">Monday – Saturday<br />By Appointment</div>
+                <div className="contact-item-value">Monday – Friday<br />8:30am – 5:00pm</div>
               </div>
             </div>
             <div className="reveal">
