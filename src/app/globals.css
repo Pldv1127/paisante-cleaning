@@ -535,10 +535,9 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.06); }
 .reviews-track-wrap::before { left: 0; background: linear-gradient(to right, var(--warm-white), transparent); }
 .reviews-track-wrap::after  { right: 0; background: linear-gradient(to left, var(--warm-white), transparent); }
 .reviews-track {
-  display: flex; gap: 24px; overflow-x: auto; padding: 12px 4px 24px;
-  scrollbar-width: none; scroll-snap-type: x mandatory; -ms-overflow-style: none;
+  display: flex; gap: 24px; padding: 12px 4px 24px;
+  width: max-content; will-change: transform;
 }
-.reviews-track::-webkit-scrollbar { display: none; }
 .review-card {
   flex: 0 0 340px; background: var(--warm-white);
   border: 1px solid var(--border); border-radius: 4px;

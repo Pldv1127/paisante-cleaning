@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 type Review = {
   id: string;
@@ -198,11 +198,19 @@ function SubmitReviewModal({ onClose }: { onClose: () => void }) {
   );
 }
 
+const CARD_STEP = 364; // 340px card + 24px gap
+
 export default function ReviewsSection() {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
+
   const trackRef = useRef<HTMLDivElement>(null);
+  const offsetRef = useRef(0);
+  const rafRef = useRef<number>(0);
+  const hoveredRef = useRef(false);
+  const btnPausedRef = useRef(false);
+  const pauseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     fetch("/api/reviews")
@@ -214,15 +222,6 @@ export default function ReviewsSection() {
       .catch(() => setLoading(false));
   }, []);
 
-  const scroll = (dir: "left" | "right") => {
-    trackRef.current?.scrollBy({ left: dir === "right" ? 364 : -364, behavior: "smooth" });
-  };
-
-  const avgRating = reviews.length
-    ? (reviews.reduce((s, r) => s + r.rating, 0) / reviews.length).toFixed(1)
-    : "5.0";
-
-  // Placeholder reviews shown while loading or if no reviews yet
   const placeholderReviews: Review[] = [
     { id: "p1", authorName: "Sarah M.", rating: 5, text: "Val and her team are absolutely wonderful. My home has never been this spotless. They pay attention to every detail and always go above and beyond.", createdAt: "" },
     { id: "p2", authorName: "Robert T.", rating: 5, text: "We hired Paisante for our medical office and the results have been exceptional. The level of cleanliness and professionalism is exactly what a healthcare environment needs.", createdAt: "" },
@@ -232,6 +231,49 @@ export default function ReviewsSection() {
   ];
 
   const displayReviews = reviews.length > 0 ? reviews : placeholderReviews;
+  const totalWidth = displayReviews.length * CARD_STEP;
+
+  const applyOffset = useCallback(() => {
+    if (trackRef.current) {
+      trackRef.current.style.transform = `translateX(-${offsetRef.current}px)`;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (loading) return;
+    const tick = () => {
+      if (!hoveredRef.current && !btnPausedRef.current) {
+        offsetRef.current += 0.4;
+        if (offsetRef.current >= totalWidth) offsetRef.current -= totalWidth;
+        applyOffset();
+      }
+      rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [loading, totalWidth, applyOffset]);
+
+  const scroll = (dir: "left" | "right") => {
+    if (!trackRef.current) return;
+    btnPausedRef.current = true;
+    const step = dir === "right" ? CARD_STEP : -CARD_STEP;
+    let target = offsetRef.current + step;
+    target = ((target % totalWidth) + totalWidth) % totalWidth;
+    offsetRef.current = target;
+    trackRef.current.style.transition = "transform 0.5s ease";
+    applyOffset();
+    setTimeout(() => {
+      if (trackRef.current) trackRef.current.style.transition = "";
+    }, 520);
+    if (pauseTimerRef.current) clearTimeout(pauseTimerRef.current);
+    pauseTimerRef.current = setTimeout(() => {
+      btnPausedRef.current = false;
+    }, 30000);
+  };
+
+  const avgRating = reviews.length
+    ? (reviews.reduce((s, r) => s + r.rating, 0) / reviews.length).toFixed(1)
+    : "5.0";
 
   return (
     <section id="reviews" className="section" style={{ background: "var(--warm-white)" }}>
@@ -257,13 +299,17 @@ export default function ReviewsSection() {
           </div>
         </div>
 
-        <div className="reviews-track-wrap reveal">
-          <div className="reviews-track" ref={trackRef}>
-            {loading ? (
-              <div style={{ padding: "40px", color: "var(--mid-gray)" }}>Loading reviews…</div>
-            ) : (
-              displayReviews.map((r, i) => (
-                <div className="review-card" key={r.id}>
+        <div
+          className="reviews-track-wrap reveal"
+          onMouseEnter={() => { hoveredRef.current = true; }}
+          onMouseLeave={() => { hoveredRef.current = false; }}
+        >
+          {loading ? (
+            <div style={{ padding: "40px", color: "var(--mid-gray)" }}>Loading reviews…</div>
+          ) : (
+            <div className="reviews-track" ref={trackRef}>
+              {[...displayReviews, ...displayReviews].map((r, i) => (
+                <div className="review-card" key={`${r.id}-${i}`}>
                   <span className="review-google-icon">
                     {reviews.length > 0 ? "Verified" : ""}
                   </span>
@@ -290,9 +336,9 @@ export default function ReviewsSection() {
                   </div>
                   <p className="review-text">"{r.text}"</p>
                 </div>
-              ))
-            )}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="reviews-nav">
