@@ -314,7 +314,7 @@ export default function Home() {
             <div className="contact-info reveal">
               <div className="contact-item">
                 <div className="contact-item-label">Location</div>
-                <div className="contact-item-value">Serving Bucks County<br />and surrounding areas</div>
+                <div className="contact-item-value">Serving Lower Bucks County<br />and surrounding areas</div>
               </div>
               <div className="contact-item">
                 <div className="contact-item-label">Phone</div>
