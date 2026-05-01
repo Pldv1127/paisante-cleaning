@@ -5,38 +5,13 @@ export const metadata = {
 
 export default function PrivacyPolicyPage() {
   return (
-    <div style={{
-      minHeight: "100vh",
-      background: "#FAF7F2",
-      fontFamily: "'DM Sans', sans-serif",
-      padding: "60px 24px",
-    }}>
-      <div style={{ maxWidth: "760px", margin: "0 auto" }}>
-        <a
-          href="/"
-          style={{
-            display: "inline-block",
-            marginBottom: "40px",
-            color: "#2C4A3E",
-            textDecoration: "none",
-            fontSize: "0.9rem",
-            fontWeight: 500,
-          }}
-        >
-          ← Back to Home
-        </a>
+    <div className="policy-page">
+      <div className="policy-wrap">
+        <a href="/" className="policy-back">← Back to Home</a>
 
-        <h1 style={{
-          fontFamily: "'Playfair Display', serif",
-          color: "#2C4A3E",
-          fontSize: "2.2rem",
-          marginBottom: "8px",
-        }}>
-          Privacy Policy
-        </h1>
-        <p style={{ color: "#888", fontSize: "0.85rem", marginBottom: "48px" }}>
-          Last updated: April 30, 2026
-        </p>
+        <div className="section-tag">Legal</div>
+        <h1 className="policy-h1">Privacy Policy</h1>
+        <p className="policy-date">Last updated: April 30, 2026</p>
 
         {[
           {
@@ -80,23 +55,10 @@ export default function PrivacyPolicyPage() {
             body: `If you have any questions about this privacy policy, please contact us:\n\nPaisante Cleaning Services\nPhone: (267) 495-6269\nEmail: wpaisantecleaning@gmail.com\nServing Pennsylvania and surrounding areas`,
           },
         ].map(({ title, body }) => (
-          <div key={title} style={{ marginBottom: "40px" }}>
-            <h2 style={{
-              fontFamily: "'Playfair Display', serif",
-              color: "#2C4A3E",
-              fontSize: "1.2rem",
-              marginBottom: "12px",
-            }}>
-              {title}
-            </h2>
-            <p style={{
-              color: "#444",
-              lineHeight: "1.8",
-              whiteSpace: "pre-line",
-              fontSize: "0.95rem",
-            }}>
-              {body}
-            </p>
+          <div key={title} className="policy-section">
+            <p className="policy-label">{title}</p>
+            <h2 className="policy-h2">{title}</h2>
+            <p className="policy-body">{body}</p>
           </div>
         ))}
       </div>
