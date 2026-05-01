@@ -1,12 +1,7 @@
 "use client";
 
 import { useState } from "react";
-
-declare global {
-  interface Window {
-    gtag?: (...args: unknown[]) => void;
-  }
-}
+import { trackEvent } from "@/lib/analytics";
 
 type FormState = "idle" | "loading" | "success" | "error";
 
@@ -59,6 +54,9 @@ export default function ContactForm() {
 
       setState("success");
       setForm({ firstName: "", lastName: "", email: "", phone: "", service: "", message: "" });
+      // GA4 lead event
+      trackEvent("generate_lead", { service: form.service || "unspecified" });
+      // Google Ads conversion
       window.gtag?.("event", "conversion", {
         send_to: `${process.env.NEXT_PUBLIC_GOOGLE_ADS_ID}/quote_request`,
       });

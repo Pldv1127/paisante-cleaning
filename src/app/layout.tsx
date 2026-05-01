@@ -3,8 +3,8 @@ import Script from "next/script";
 import "./globals.css";
 import ClientEffects from "@/components/ClientEffects";
 
-// Replace AW-XXXXXXXXXX with your Google Ads ID once you have it
 const GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID ?? "AW-XXXXXXXXXX";
+const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? "";
 
 export const metadata: Metadata = {
   title: "Paisante Cleaning Services | Pennsylvania",
@@ -32,16 +32,17 @@ export default function RootLayout({
         {children}
         <ClientEffects />
       </body>
-      {/* Google Ads tag — loads after page is interactive so it never blocks render */}
+      {/* GA4 + Google Ads — one shared gtag.js, both configured from a single init */}
       <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}`}
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
         strategy="afterInteractive"
       />
-      <Script id="google-ads-init" strategy="afterInteractive">
+      <Script id="gtag-init" strategy="afterInteractive">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
+          gtag('config', '${GA_ID}');
           gtag('config', '${GOOGLE_ADS_ID}');
         `}
       </Script>
