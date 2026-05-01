@@ -358,6 +358,20 @@ export default function Home() {
               <div>
                 <div className="footer-brand-name">Paisante <span>Cleaning Services</span></div>
                 <p className="footer-tagline">Personalized, professional cleaning for homes and businesses across Pennsylvania. Over 22 years of trusted service.</p>
+                <a
+                  href="https://nextdoor.com/pages/paisante-cleaning-services-feasterville-trevose-pa/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Find us on Nextdoor"
+                  className="footer-nextdoor"
+                >
+                  <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect width="26" height="26" rx="6" fill="#00B386"/>
+                    <path d="M13 3L23 12H20V22H6V12H3L13 3Z" fill="white"/>
+                    <rect x="10" y="16" width="6" height="6" fill="#00B386"/>
+                  </svg>
+                  Find us on Nextdoor
+                </a>
               </div>
             </div>
             <div>

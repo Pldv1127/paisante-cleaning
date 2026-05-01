@@ -687,6 +687,8 @@ footer { background: linear-gradient(135deg, #69d0ff 0%, #2C3E70 100%); padding:
 .footer-copy { font-size: .8rem; color: rgba(255,255,255,.3); }
 .footer-copy a { color: rgba(255,255,255,.5); text-decoration: none; }
 .footer-pa { font-size: .8rem; color: rgba(255,255,255,.3); letter-spacing: .04em; }
+.footer-nextdoor { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; color: rgba(255,255,255,.5); font-size: .82rem; text-decoration: none; transition: color .2s, opacity .2s; }
+.footer-nextdoor:hover { color: #9CCC46; opacity: .85; }
 
 /* ── SCROLL REVEAL ── */
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
